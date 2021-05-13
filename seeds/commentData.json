@@ -1,0 +1,14 @@
+[
+  {
+    "blog_id": 1,
+    "comment_desc": "This is comment 1"
+  },
+  {
+    "blog_id": 2,
+    "comment_desc": "This is comment 2"
+  },
+  {
+    "blog_id": 3,
+    "comment_desc": "This is comment 3"
+  }
+]
