@@ -21,12 +21,12 @@ const newFormHandler = async (event) => {
   }
 };
 
-const newFormHandler = async (event) => {
+const commentButtonHandler = async (event, comment_desc) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
-    const comment_desc = document.querySelector('#comment').value.trim();
 
     if (comment_desc) {
+      console.log(comment_desc);
       const response = await fetch(`/api/blogs/${id}`, {
         method: 'POST',
         body: JSON.stringify({ comment_desc }),
@@ -35,11 +35,11 @@ const newFormHandler = async (event) => {
         }
       });
 
-      if (response.ok) {
-        document.location.replace('/profile');
-      } else {
-        alert('Failed to create blog');
-      }
+      //   if (response.ok) {
+      //     document.location.replace('/profile');
+      //   } else {
+      //     alert('Failed to create blog');
+      //   }
     }
   }
 };
@@ -64,9 +64,11 @@ document
   .querySelector('.new-blog-form')
   .addEventListener('submit', newFormHandler);
 
-document
-  .querySelector('.comment-blog-form')
-  .addEventListener('submit', commentButtonHandler);
+const submitBtn = document.getElementById('submitButton');
+submitBtn.addEventListener('submit', function () {
+  const comment_desc = document.querySelector('#comment').value.trim();
+  commentButtonHandler(comment_desc);
+});
 
 document
   .querySelector('.blog-list')

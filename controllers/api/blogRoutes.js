@@ -16,16 +16,17 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 router.post('/:id', withAuth, async (req, res) => {
+  console.log(req.body, 'ROUTE HIT');
   try {
     const newComment = await Comment.create({
       where: {
         id: req.params.id,
         user_id: req.session.user_id
       },
-      ...req.body,
+      comment_desc: req.body.comment_desc,
       blog_id: req.session.blog_id
     });
-
+    console.log(newComment);
     res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json(err);
