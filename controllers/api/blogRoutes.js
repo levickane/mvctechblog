@@ -2,20 +2,7 @@ const router = require('express').Router();
 const { Blog, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.post('/', withAuth, async (req, res) => {
-  try {
-    const newBlog = await Blog.create({
-      ...req.body,
-      user_id: req.session.user_id
-    });
-
-    res.status(200).json(newBlog);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.post('/:id', withAuth, async (req, res) => {
+router.post('/:id', async (req, res) => {
   console.log(req.body, 'COMMENT ROUTE HIT');
   try {
     const newComment = await Comment.create({
@@ -50,6 +37,19 @@ router.delete('/:id', withAuth, async (req, res) => {
     res.status(200).json(blogData);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.post('/', withAuth, async (req, res) => {
+  try {
+    const newBlog = await Blog.create({
+      ...req.body,
+      user_id: req.session.user_id
+    });
+
+    res.status(200).json(newBlog);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 

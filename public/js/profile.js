@@ -61,12 +61,6 @@ submitBtn.addEventListener('click', async function (e) {
           'Content-Type': 'application/json'
         }
       });
-
-      //   if (response.ok) {
-      //     document.location.replace('/profile');
-      //   } else {
-      //     alert('Failed to create blog');
-      //   }
     }
   }
   console.log(comment_desc);
