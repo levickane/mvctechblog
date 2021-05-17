@@ -16,7 +16,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 router.post('/:id', withAuth, async (req, res) => {
-  console.log(req.body, 'ROUTE HIT');
+  console.log(req.body, 'COMMENT ROUTE HIT');
   try {
     const newComment = await Comment.create({
       where: {

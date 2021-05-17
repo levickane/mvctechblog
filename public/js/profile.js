@@ -22,26 +22,8 @@ const newFormHandler = async (event) => {
 };
 
 const commentButtonHandler = async (event, comment_desc) => {
-  if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
-
-    if (comment_desc) {
-      console.log(comment_desc);
-      const response = await fetch(`/api/blogs/${id}`, {
-        method: 'POST',
-        body: JSON.stringify({ comment_desc }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      //   if (response.ok) {
-      //     document.location.replace('/profile');
-      //   } else {
-      //     alert('Failed to create blog');
-      //   }
-    }
-  }
+  event.preventDefault();
+  console.log(comment_desc);
 };
 
 const delButtonHandler = async (event) => {
@@ -60,16 +42,37 @@ const delButtonHandler = async (event) => {
   }
 };
 
-document
-  .querySelector('.new-blog-form')
-  .addEventListener('submit', newFormHandler);
+// document
+//   .querySelector('.new-blog-form')
+//   .addEventListener('submit', newFormHandler);
 
 const submitBtn = document.getElementById('submitButton');
-submitBtn.addEventListener('submit', function () {
-  const comment_desc = document.querySelector('#comment').value.trim();
-  commentButtonHandler(comment_desc);
+submitBtn.addEventListener('click', async function (e) {
+  e.preventDefault();
+  let comment_desc = document.getElementById('comment').value.trim();
+  if (e.target.hasAttribute('data-id')) {
+    const id = e.target.getAttribute('data-id');
+    console.log(id);
+    if (comment_desc) {
+      const response = await fetch(`/api/blogs/${id}`, {
+        method: 'POST',
+        body: JSON.stringify(comment_desc),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      //   if (response.ok) {
+      //     document.location.replace('/profile');
+      //   } else {
+      //     alert('Failed to create blog');
+      //   }
+    }
+  }
+  console.log(comment_desc);
+  //   commentButtonHandler(comment_desc);
 });
 
-document
-  .querySelector('.blog-list')
-  .addEventListener('click', delButtonHandler);
+// document
+//   .querySelector('.blog-list')
+//   .addEventListener('click', delButtonHandler);
