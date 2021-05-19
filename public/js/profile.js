@@ -51,16 +51,21 @@ submitBtn.addEventListener('click', async function (e) {
   e.preventDefault();
   let comment_desc = document.getElementById('comment').value.trim();
   if (e.target.hasAttribute('data-id')) {
-    const id = e.target.getAttribute('data-id');
+    const blogId = e.target.getAttribute('data-id');
     console.log(id);
     if (comment_desc) {
-      const response = await fetch(`/api/blogs/${id}`, {
+      const response = await fetch(`/api/comments/${blogId}`, {
         method: 'POST',
-        body: JSON.stringify(comment_desc),
+        body: { comment_desc },
         headers: {
           'Content-Type': 'application/json'
         }
       });
+      if (response.ok) {
+        document.location.reload();
+      } else {
+        alert('Failed to comment blog');
+      }
     }
   }
   console.log(comment_desc);
