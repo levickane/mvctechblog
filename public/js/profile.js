@@ -47,30 +47,33 @@ const delButtonHandler = async (event) => {
 //   .addEventListener('submit', newFormHandler);
 
 const submitBtn = document.getElementById('submitButton');
-submitBtn.addEventListener('click', async function (e) {
+submitBtn.addEventListener('click', function (e) {
   e.preventDefault();
   let comment_desc = document.getElementById('comment').value.trim();
   if (e.target.hasAttribute('data-id')) {
     const blogId = e.target.getAttribute('data-id');
-    console.log(id);
-    if (comment_desc) {
-      const response = await fetch(`/api/comments/${blogId}`, {
-        method: 'POST',
-        body: { comment_desc },
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      if (response.ok) {
-        document.location.reload();
-      } else {
-        alert('Failed to comment blog');
-      }
-    }
+    console.log(blogId);
+    response(comment_desc, blogId);
   }
   console.log(comment_desc);
-  //   commentButtonHandler(comment_desc);
 });
+
+const response = (param1, param2) => {
+  fetch('/api/comments', {
+    method: 'POST',
+    body: JSON.stringify({ param1, param2 }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((data) => {
+    if (data) {
+      console.log('HELLO', data);
+      //   document.location.reload();
+    } else {
+      alert('Failed to comment blog');
+    }
+  });
+};
 
 // document
 //   .querySelector('.blog-list')

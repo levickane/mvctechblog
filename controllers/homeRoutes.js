@@ -41,8 +41,8 @@ router.get('/blogs/:id', async (req, res) => {
         }
       ]
     });
-
     const blog = blogData.get({ plain: true });
+    console.log(blog, 'from HOMEROUTES page');
 
     res.render('blog', {
       ...blog,
