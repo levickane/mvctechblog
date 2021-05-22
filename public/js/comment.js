@@ -14,7 +14,7 @@ submitBtn.addEventListener('click', async function (e) {
     });
     if (response.ok) {
       console.log(`we did it`);
-      //   window.location.reload()
+      window.location.reload();
     } else {
       alert('failed to create comment');
     }
