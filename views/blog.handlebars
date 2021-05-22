@@ -3,10 +3,10 @@
   <p>{{description}}</p>
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
   <p>Here's the comments:
-      {{#each comments as |comment|}}
-    <h4>{{comment.comment_desc}}{{log comment}}</h4>
+    {{#each comments as |comment|}}
+      <h4>{{comment.comment_desc}}{{log comment}}</h4>
     {{/each}}
-    </p>
+  </p>
   <p>
     <a href='/'><button class='btn btn-primary'>Home</button></a>
   </p>
@@ -27,4 +27,4 @@
     </button>
   </form>
 </div>
-<script src='/js/profile.js'></script>
+<script src='/js/comment.js'></script>
