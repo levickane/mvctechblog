@@ -28,7 +28,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/blogs/:id', async (req, res) => {
-  console.log('HOMEROUTE HIT');
   try {
     const blogData = await Blog.findByPk(req.params.id, {
       include: [
@@ -42,8 +41,6 @@ router.get('/blogs/:id', async (req, res) => {
       ]
     });
     const blog = blogData.get({ plain: true });
-    console.log(blog, 'from HOMEROUTES page');
-
     res.render('blog', {
       ...blog,
       logged_in: req.session.logged_in,

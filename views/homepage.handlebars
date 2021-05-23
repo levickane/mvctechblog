@@ -1,9 +1,9 @@
 <!-- Loop over each object in the blogs array -->
 {{#each blogs as |blog|}}
-  <div class='row mb-4 blog'>
-    <div class='col-md-5'>
+  <div class='col-6 blog'>
+    <div class='card p-2 bg-light'>
       <h2>
-        <a href='/blogs/{{blog.id}}'>{{blog.name}}</a>
+        <a href='/blogs/{{blog.id}}' class='text-dark'>{{blog.name}}</a>
       </h2>
 
       <p>Created on
