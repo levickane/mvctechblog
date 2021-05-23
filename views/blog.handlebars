@@ -5,10 +5,13 @@
   {{#if comments}}
     <h4>Here's the comments:</h4>
     {{#each comments as |comment|}}
-      <p>
-        {{comment.comment_desc}}
-        {{format_date date_created}}
-        {{log comment}}</p>
+      <div class='card p-2 bg-primary text-white'>
+        <p>
+          {{format_date date_created}}:
+          {{comment.comment_desc}}
+          {{log comment}}</p>
+
+      </div>
     {{/each}}
   {{/if}}
   <p>
