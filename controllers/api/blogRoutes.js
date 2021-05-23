@@ -28,8 +28,25 @@ router.post('/', withAuth, async (req, res) => {
       ...req.body,
       user_id: req.session.user_id
     });
-
     res.status(200).json(newBlog);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.put('/:id', withAuth, async (req, res) => {
+  console.log('******UPDATE ROUT******');
+  try {
+    const editBlog = await Blog.update({
+      where: {
+        id: req.params.id,
+        name: req.body.name,
+        description: req.body.description,
+        user_id: req.session.user_id
+      }
+    });
+    console.log(editBlog);
+    res.status(200).json(editBlog);
   } catch (err) {
     res.status(400).json(err);
   }

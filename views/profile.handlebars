@@ -24,7 +24,6 @@
 {{#if blogs.length}}
   <div class='col-md-6 mt-4 blog-list bg-light'>
     <h3>Current blogs:</h3>
-
     {{#each blogs as |blog|}}
       <div class='row mb-2'>
         <div class='col-md-8'>
@@ -35,14 +34,54 @@
         </div>
         <div class='col-md-4'>
           <button
-            class='btn btn-sm btn-danger'
+            class='btn btn-sm btn-danger delete'
             data-id='{{blog.id}}'
           >DELETE</button>
+          <button
+            class='btn btn-sm btn-green edit'
+            data-id='{{blog.id}}'
+          >EDIT</button>
         </div>
+      </div>
+      {{! edit form goes here }}
+      <div
+        class='col-md-6 mt-4 bg-light edit-div'
+        style='display: none;'
+        data-id='{{blog.id}}'
+      >
+        <h3>Edit Your Blog Post:</h3>
+
+        <form class='form edit-blog-form'>
+          <div class='form-group'>
+            <label for='edit-blog-name'>Blog Title:</label>
+            <input
+              class='form-input'
+              id='edit-blog-name'
+              type='text'
+              name='blog-name'
+              value='{{blog.name}}'
+            />
+          </div>
+          <div class='form-group'>
+            <label for='edit-blog-desc'>description:</label>
+            <textarea
+              class='form-input'
+              id='edit-blog-desc'
+              name='edit-blog-desc'
+              placeholder='{{blog.description}}'
+            ></textarea>
+          </div>
+          <div class='form-group'>
+            <button
+              type='submit'
+              class='btn btn-primary update'
+              data-id='{{blog.id}}'
+            >Update!</button>
+          </div>
+        </form>
       </div>
     {{/each}}
   </div>
 {{/if}}
-{{! </div> }}
 
 <script src='./js/profile.js'></script>
