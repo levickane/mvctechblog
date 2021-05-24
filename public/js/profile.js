@@ -47,11 +47,8 @@ const editButtonHandler = async (event) => {
   ) {
     const editForm = document.querySelectorAll('.edit-div');
     const id = event.target.getAttribute('data-id');
-    console.log(editForm);
     editForm.forEach((div) => {
-      console.log(div.dataset.id);
       let divId = div.dataset.id;
-      console.log('hello', divId);
       if (divId == id) {
         div.style.display = 'block';
       }
@@ -61,27 +58,22 @@ const editButtonHandler = async (event) => {
 
 const updateBlogHandler = async (event) => {
   event.preventDefault();
-  if (
-    event.target.hasAttribute('data-id') &&
-    event.target.classList.contains('update')
-  ) {
-    const id = event.target.getAttribute('data-id');
-    const name = document.getElementById('edit-blog-name').value.trim();
-    const description = document.getElementById('edit-blog-desc').value.trim();
-    console.log(name, description);
-    if (name && description) {
-      const response = await fetch(`/api/blogs/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify({ name, description }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      if (response.ok) {
-        document.location.replace('/profile');
-      } else {
-        alert('Failed to UPDATE blog');
+  const id = event.target.getAttribute('data-id');
+  const name = document.getElementById('edit-blog-name').value.trim();
+  const description = document.getElementById('edit-blog-desc').value.trim();
+  if (id) {
+    const response = await fetch(`/api/blogs/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ name, description }),
+      headers: {
+        'Content-Type': 'application/json'
       }
+    });
+    console.log(response);
+    if (response.ok) {
+      document.location.replace(`/blogs/${id}`);
+    } else {
+      alert('Failed to UPDATE blog');
     }
   }
 };
