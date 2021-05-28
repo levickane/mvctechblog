@@ -59,9 +59,12 @@ const editButtonHandler = async (event) => {
 const updateBlogHandler = async (event) => {
   event.preventDefault();
   const id = event.target.getAttribute('data-id');
-  const name = document.getElementById('edit-blog-name').value.trim();
-  const description = document.getElementById('edit-blog-desc').value.trim();
-  if (id) {
+  const name = document.getElementsByClassName('edit-blog-name').value.trim();
+  const description = document
+    .getElementsByClassName('edit-blog-desc')
+    .value.trim();
+  console.log(id);
+  if (id && name && description) {
     const response = await fetch(`/api/blogs/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ name, description }),
@@ -90,6 +93,4 @@ document
   .querySelector('.blog-list')
   .addEventListener('click', editButtonHandler);
 
-document
-  .querySelector('.edit-blog-form')
-  .addEventListener('click', updateBlogHandler);
+document.querySelector('.update').addEventListener('click', updateBlogHandler);

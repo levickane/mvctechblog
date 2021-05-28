@@ -49,7 +49,7 @@ router.put('/:id', withAuth, async (req, res) => {
         }
       }
     );
-    console.log(editBlog);
+    console.log('hello', editBlog);
     res.status(200).json(editBlog);
   } catch (err) {
     res.status(400).json(err);
